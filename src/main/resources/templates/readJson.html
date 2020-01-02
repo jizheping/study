@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $.ajax({
+            type: 'post',
+            url: "http://lcoalhost:8080/huangpu/wlw/getHistory_mqs_today",
+            dataType: 'json',
+            success: function(data) {
+                console.log(data);
+            }
+        });
+
+        var ids = [];
+
+        ids.push(1);
+
+        var s = "123";
+
+        s.split();
+
+        ids[i].equals(1);
+    })
+</script>
+<body>
+
+</body>
+</html>

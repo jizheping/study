@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        var collapse = new Set(["collapseOne","collapseTwo","collapseThree","collapseFour","collapseRobot"]);
+        var titleDiv = ["event","video","security","robot_track"];
+        var sum = true;
+
+        console.log(typeof collapse);
+        console.log(typeof titleDiv);
+        console.log(typeof sum);
+
+        /*$.ajax({
+            url:"http://localhost:8080/student/getStudentMessage",
+            data:{},
+            type:"get",
+            dataType:"json",
+            success:function(obj){
+                length = obj.length;
+
+                if(length>3){
+                    for(var i = 0;i < 3;i++){
+                        $("#student").append("<tr id='"+obj[i].id+"'><td>"+obj[i].id+"</td><td>"+obj[i].name+"</td><td>"+obj[i].sex+"</td></tr>");
+                    }
+                    $("#student").append("<tr><td colspan='3'><button onclick='showAll()' id='showAll'>展示全部</button></td></tr>");
+
+                    for(var i=3;i<length;i++){
+                        $("#student").append("<tr id='"+obj[i].id+"' hidden='hidden'><td>"+obj[i].id+"</td><td>"+obj[i].name+"</td><td>"+obj[i].sex+"</td></tr>");
+                    }
+
+                    $("#student").append("<tr><td colspan='3'><button onclick='del()' id='del'>收起</button></td></tr>")
+
+                    $("#del").attr("hidden",true);
+                }else{
+                    for(var i in obj){
+                        $("#student").append("<tr id='"+obj[i].id+"'><td>"+obj[i].id+"</td><td>"+obj[i].name+"</td><td>"+obj[i].sex+"</td></tr>");
+                    }
+                }
+            }
+        })*/
+    });
+
+    function showAll(){
+        $("#showAll").attr("hidden",true);
+        for(var i=3;i<=length;i++){
+            $("#"+i).attr("hidden",false);
+        }
+        $("#del").attr("hidden",false);
+    }
+
+    function del(){
+        for(var i=4;i<=length;i++){
+            $("#"+i).attr("hidden",true);
+            $("#showAll").attr("hidden",false);
+            $("#del").attr("hidden",true);
+        }
+    }
+</script>
+<body>
+    <div align="center">
+        <button onmousedown="click1(1)" onmouseup="click1(0)">点击</button>
+        <table id="student">
+            <tr>
+                <td>编号</td>
+                <td>姓名</td>
+                <td>性别</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

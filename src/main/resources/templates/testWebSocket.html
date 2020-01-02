@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="/jquery-3.2.1.min.js"></script>
+<script>
+    var websocket = null;
+    var host = document.location.host;
+    var username = "test1";
+    //alert(username);
+    //判断当前浏览器是否支持WebSocket连接
+     if('WebSocket' in window){
+         console.log("当前浏览器支持WebSocket!");
+         websocket = new WebSocket("ws://localhost:8081/websocket/" + username);
+     }else {
+         console.log("当前浏览器不支持WebSocket!");
+     }
+     //WebSocket连接发生错误的回调方法
+    websocket.onerror = function(){
+        console.log("WebSocket连接发生错误!");
+        setMessageInnerHTML("WebSocket连接发生错误!");
+    };
+
+     //WebSocket连接成功建立的回调方法
+    websocket.onopen = function(){
+        console.log("WebSocket连接成功!");
+        setMessageInnerHTML("WebSocket连接成功!");
+    };
+
+     //WebSocket接收到消息的回调方法
+    websocket.onmessage = function(message){
+        console.log("接收到消息啦!!!");
+        alert("后台推送的消息为:" + message);
+        websocket.close();
+        console.log("消息接收完毕,关闭WebSocket连接");
+    };
+
+    //WebSocket连接关闭的回调方法
+     websocket.onclose = function(){
+         setMessageInnerHTML("WebSocket连接关闭!");
+     };
+
+     //监听窗口关闭事件,当窗口关闭时,主动关闭WebSocket连接,防止连接还没断开就关闭，server端会抛出异常
+    window.onbeforeunload = function(){
+         closeWebSocket();
+    };
+
+    //主动关闭WebSocket连接
+    function closeWebSocket(){
+         websocket.close();
+    }
+
+    //将消息显示在网页上
+    function setMessageInnerHTML(innerHTML){
+        document.getElementById("message").innerHTML += innerHTML + "<br/>";
+    }
+</script>
+<body>
+    <div align="center">
+        <h1>这是WebSocket页面</h1>
+        <span id="message"></span>
+    </div>
+</body>
+</html>
